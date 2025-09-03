@@ -1,0 +1,85 @@
+srprasath@USBLRSRPRAKAS1 MINGW64 ~/Documents
+$ mkdir practice-repo
+
+srprasath@USBLRSRPRAKAS1 MINGW64 ~/Documents
+$ cd practice-repo/
+
+srprasath@USBLRSRPRAKAS1 MINGW64 ~/Documents/practice-repo
+$ touch test.txt
+
+srprasath@USBLRSRPRAKAS1 MINGW64 ~/Documents/practice-repo
+$ echo "hai all" >> test.txt
+
+srprasath@USBLRSRPRAKAS1 MINGW64 ~/Documents/practice-repo
+$ cat test.txt
+hai all
+
+srprasath@USBLRSRPRAKAS1 MINGW64 ~/Documents/practice-repo
+$ git init
+Initialized empty Git repository in C:/Users/srprasath/Documents/practice-repo/.git/
+
+srprasath@USBLRSRPRAKAS1 MINGW64 ~/Documents/practice-repo (master)
+$ git remote add origin https://github.com/ravitips/GitDemo.git
+
+
+
+
+srprasath@USBLRSRPRAKAS1 MINGW64 ~/Documents/practice-repo (master)
+$
+
+srprasath@USBLRSRPRAKAS1 MINGW64 ~/Documents/practice-repo (master)
+$ git remote -v
+origin  https://github.com/ravitips/GitDemo.git (fetch)
+origin  https://github.com/ravitips/GitDemo.git (push)
+
+srprasath@USBLRSRPRAKAS1 MINGW64 ~/Documents/practice-repo (master)
+$ git fetch origin
+remote: Enumerating objects: 26, done.
+remote: Counting objects: 100% (26/26), done.
+remote: Compressing objects: 100% (18/18), done.
+remote: Total 26 (delta 3), reused 14 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (26/26), 6.17 KiB | 76.00 KiB/s, done.
+From https://github.com/ravitips/GitDemo
+ * [new branch]      fruits     -> origin/fruits
+ * [new branch]      master     -> origin/master
+ * [new branch]      paccar     -> origin/paccar
+
+srprasath@USBLRSRPRAKAS1 MINGW64 ~/Documents/practice-repo (master)
+$ git checkout -b fruits origin/fruits
+branch 'fruits' set up to track 'origin/fruits'.
+Switched to a new branch 'fruits'
+
+srprasath@USBLRSRPRAKAS1 MINGW64 ~/Documents/practice-repo (fruits)
+$ git add test.txt
+warning: in the working copy of 'test.txt', LF will be replaced by CRLF the next time Git touches it
+
+srprasath@USBLRSRPRAKAS1 MINGW64 ~/Documents/practice-repo (fruits)
+$ git commit -m "Add test.txt to fruits branch"
+[fruits 0b89b0c] Add test.txt to fruits branch
+ Committer: Prasath <srprasath@deloitte.com>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+)
+ create mode 100644 test.txt
+
+srprasath@USBLRSRPRAKAS1 MINGW64 ~/Documents/practice-repo (fruits)
+$ git push origin fruits
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Writing objects: 100% (3/3), 260 bytes | 260.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To https://github.com/ravitips/GitDemo.git
+   f9d14ac..0b89b0c  fruits -> fruits
+
+srprasath@USBLRSRPRAKAS1 MINGW64 ~/Documents/practice-repo (fruits)
+$
