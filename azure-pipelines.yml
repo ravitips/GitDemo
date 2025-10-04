@@ -10,4 +10,7 @@ steps:
     pwd
     ls -l
     whoami
+    sudo docker stop web 
+    sudo docker rm web
+    sudo docker run -d -p 80:80 --name web python-app:latest
   displayName: 'Run simple shell commands'
