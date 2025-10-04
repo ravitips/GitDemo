@@ -1,43 +1,13 @@
 trigger:
-- dev
+- dev  # or your branch name, e.g. dev
 
 pool:
-  vmImage: 'ubuntu-latest'
-
-variables:
-  imageName: 'flask-app'
+  name: Default  # your self-hosted agent pool name
 
 steps:
-- task: Docker@2
-  displayName: 'Build Docker Image'
-  inputs:
-    command: build
-    Dockerfile: 'Dockerfile'
-    tags: |
-      $(imageName):latest
-
-- task: Docker@2
-  displayName: 'Save Docker Image as TAR'
-  inputs:
-    command: save
-    imageName: '$(imageName):latest'
-    saveTo: '$(Build.ArtifactStagingDirectory)/$(imageName).tar'
-
-- publish: $(Build.ArtifactStagingDirectory)/$(imageName).tar
-  artifact: docker-image
-
-- task: DownloadPipelineArtifact@2
-  inputs:
-    artifact: 'docker-image'
-    path: '$(Build.ArtifactStagingDirectory)'
-
-- task: SSH@0
-  displayName: 'Deploy Docker Image to VM'
-  inputs:
-    sshEndpoint: 'vm-1'
-    runOptions: 'commands'
-    commands: |
-      docker load -i $(Build.ArtifactStagingDirectory)/$(imageName).tar
-      docker stop flask-container || true
-      docker rm flask-container || true
-      docker run -d -p 80:80 --restart unless-stopped --name flask-container $(imageName):latest
+- script: |
+    echo "Hello from Azure Pipeline!"
+    pwd
+    ls -l
+    whoami
+  displayName: 'Run simple shell commands'
