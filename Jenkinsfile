@@ -18,7 +18,7 @@ pipeline{
         stage('build and deploy'){
             steps{
                 sh """
-                    echo 'This is my pipeline page - version 1' > /var/www/html/index.nginx-debian.html
+                    echo 'This is my pipeline page - version 2' > /var/www/html/index.nginx-debian.html
                     sudo systemctl restart nginx
                 """
             }
