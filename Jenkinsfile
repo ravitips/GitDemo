@@ -2,7 +2,7 @@ pipeline{
     agent any
     
     parameters{
-        number(name: 'VERSION_NUMBER', defaultValue: 1, description: 'Version Number for your app')
+        string(name: 'VERSION_NUMBER', defaultValue: '1', description: 'Version Number for your app')
         string(name: 'NGINX_HTML_FILE', defaultValue: '/var/www/html/index.nginx-debian.html', description: 'Nginx index html file path')
         choice(name: 'SERVICE', choices: ['nginx', 'apache', 'flask'], description: 'type of service')
     }
