@@ -1,18 +1,33 @@
 trigger:
-- dev  # or your branch name, e.g. dev
+  - main
 
 pool:
-  name: Default  # your self-hosted agent pool name
+  #vmImage: 'ubuntu-latest'
+  name: Default
 
-steps:
-- script: |
-    echo "Hello from Azure Pipeline!"
-    pwd
-    ls -l
-    whoami
-    sudo docker rmi python-app:latest --force
-    sudo docker build -t python-app .
-    sudo docker stop web 
-    sudo docker rm web
-    sudo docker run -d -p 80:80 --name web python-app:latest
-  displayName: 'Run simple shell commands'
+variables:
+  fileName: "index.nginx-debian.html"
+  pathName: "/var/www/html"
+  serviceName: "nginx"
+
+
+stages:
+  - stage: Build
+    displayName: "Build Nginx"
+    jobs:
+      - job: BuildNginxJob
+        displayName: "Run Build Nginx Job"
+        steps:
+          - script: |
+              sudo cp -r $(fileName) $(pathName)/$(fileName)
+            displayName: "Run Build Nginx Script"
+
+  - stage: Deploy
+    displayName: "Deploy Nginx"
+    jobs:
+      - job: DeployNginxJob
+        displayName: "Run Deploy Nginx Job"
+        steps:
+          - script: |
+              sudo systemctl restart $(serviceName)
+            displayName: "Run Deploy Nginx Script"
