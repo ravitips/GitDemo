@@ -31,3 +31,44 @@ stages:
           - script: |
               sudo systemctl restart $(serviceName)
             displayName: "Run Deploy Nginx Script"
+
+------------------------------------------------------------------------------
+
+using keyvault
+
+trigger:
+  - main
+
+pool:
+  #vmImage: 'ubuntu-latest'
+  name: Default
+
+variables:
+  - group: myvargroup
+  - name: fileName
+    value: "index.nginx-debian.html"
+  - name: pathName
+    value: "/var/www/html"
+  
+
+stages:
+  - stage: Build
+    displayName: "Build Nginx"
+    jobs:
+      - job: BuildNginxJob
+        displayName: "Run Build Nginx Job"
+        steps:
+          - script: |
+              sudo cp -r $(fileName) $(pathName)/$(fileName)
+            displayName: "Run Build Nginx Script"
+
+  - stage: Deploy
+    displayName: "Deploy Nginx"
+    jobs:
+      - job: DeployNginxJob
+        displayName: "Run Deploy Nginx Job"
+        steps:
+          - script: |
+              sudo systemctl restart $(serviceName)
+            displayName: "Run Deploy Nginx Script"
+
