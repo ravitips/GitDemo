@@ -15,6 +15,8 @@ pipeline{
             steps{
                 sh """
                     rm -rf ravi
+                    rm -rf prasath
+                    mkdir prasath
                     mkdir ravi
                 """
             }
