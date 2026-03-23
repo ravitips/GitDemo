@@ -1,23 +1,17 @@
 pipeline{
-    agent { label 'server1' }
+    agent any
     stages{
-        stage('details'){
+        stage('Build'){
             steps{
                 sh """
-                    pwd
-                    ls
-                    whoami
-                    hostname
+                    sudo cp -r index.html /var/www/html/index.nginx-debian.html
                 """
             }
         }
-        stage('Create Directory'){
+        stage('Deploy'){
             steps{
                 sh """
-                    rm -rf ravi
-                    rm -rf prasath
-                    mkdir prasath
-                    mkdir ravi
+                    sudo systemctl restart nginx
                 """
             }
         }
